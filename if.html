@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="google" content="notranslate" />
+    <meta name="theme-color" content="#181818" />
+    <meta name="og:site_name" content="性福草" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="#181818" />
+    <meta name="description"
+      content="性福草是一个永久免费无限观看全部视频的综合平台APP,安卓IOS浏览器都可以使用的综合视频APP,视频、艳照、小说、娱乐、专享私拍视频等在性福草都能找到,快来性福草体验吧！"
+      />
+    <meta name="keywords" content="性福草,性福草无限观看" />
+    <meta name="shareaholic:image" content="/assets/images/tag/0.jpg" />
+    <!-- <meta http-equiv="Content-Security-Policy" content="style-src 'self'
+      'unsafe-inline'; image-src 'self' 'unsafe-inline'; script-src 'self'
+      'unsafe-inline' 'unsafe-eval'"> -->
+    <title>性福草</title>
+  </head>
+  <style>
+    body,html{
+      height:100%;
+      padding:0;
+      margin:0;
+    }
+    #iframe{
+      overflow: auto;
+    }
+  </style>
+  <body>
+    <iframe id="iframe" src="http://baidu.com" height="100%" width="100%"
+      frameborder="0"></iframe>
+    <script src="./cordova.js"></script>
+    <script>
+      function onDeviceReady() {
+        //获取设备信息
+        this.$store.commit("setUserDevice", window.device);
+        //设备唤醒和隐藏时触发状态
+        document.addEventListener(
+          "pause",
+          function () {
+            //Cordova应用被挂起时触发
+          },
+          false
+        );
+        document.addEventListener(
+          "resume",
+          function () {
+            //在被挂起的应用转到前台时触发
+          },
+          false
+        );
+        // 修改导航栏颜色
+        // NavigationBar.backgroundColorByHexString('#000000',true);
+        NavigationBar.backgroundColorByHexString("#C0C0C0");
+      }
+      document.addEventListener("deviceready", onDeviceReady, false);
+</script>
+  </body>
+</html>
