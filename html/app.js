@@ -1,4 +1,5 @@
-var AppList = [
+window.AppList = null;
+window.AppList = [
    {
      name: "顶级直播",
      view: 102345,
