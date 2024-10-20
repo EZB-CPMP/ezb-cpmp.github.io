@@ -15,9 +15,9 @@ var XFCAPP = {
     '性福宝官方APP',
   ],
   siteList:[
-    {url:"https://xnxx.zhikangapp.com",name:"免费XNXX",star:"1500",viewNum:0,sort:1,desc:"免费观看部分地区打开异常",typeText:"进入",image:""},
-    {url:"https://xvideos.xxx-xnxx-xvideos.com",name:"免费XVIDEOS",star:"1500",sort:1,viewNum:0,desc:"免费观看部分地区打开异常",typeText:"进入",image:""},
-    {url:"https://hs.xingfucao.xyz",name:"好色TV",star:"1500",sort:1,viewNum:0,desc:"免费观看部分地区打开异常",typeText:"进入",image:""},
+    {url:"http://xnxx.zhikangapp.com",name:"免费XNXX",star:"1500",viewNum:0,sort:1,desc:"免费观看部分地区打开异常",typeText:"进入",image:""},
+    {url:"http://xvideos.xxx-xnxx-xvideos.com",name:"免费XVIDEOS",star:"1500",sort:1,viewNum:0,desc:"免费观看部分地区打开异常",typeText:"进入",image:""},
+    {url:"http://hs.xingfucao.xyz",name:"好色TV",star:"1500",sort:1,viewNum:0,desc:"免费观看部分地区打开异常",typeText:"进入",image:""},
   ],
   videoList:[
     'http://awww.xnxxsp.com',
