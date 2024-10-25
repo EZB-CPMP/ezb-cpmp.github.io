@@ -20,7 +20,7 @@ window.XFCAPP = {
     {url:"http://hs.sebocao.xyz",name:"好色TV",star:"234410",sort:1,viewNum:0,desc:"免费观看部分地区打开异常",typeText:"进入",image:""},
   ],
   videoList:[
-    'http://hs.sebocao.xyz',
+    'http://hs1.sebocao.xyz',
   ],
   iframevideolist:[],
   fabuDOM:`
