@@ -1,4 +1,4 @@
-var XFCAPP = {
+window.XFCAPP = {
   version:"1.0.1",
   common:"https://www.sebocao.cc",
   shareURL: "https://download.xfc01.com/d/xfc.apk",
