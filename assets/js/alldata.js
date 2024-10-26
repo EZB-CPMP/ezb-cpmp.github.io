@@ -1,3 +1,17 @@
+window.RandomWord = function(randomFlag, min, max) {
+  let str = "",
+    range = min,
+    arr = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '3', '4', '5', '6', '7', '8', '9'];
+  // 随机产生
+  if (randomFlag) {
+    range = Math.round(Math.random() * (max - min)) + min;
+  }
+  for (var i = 0; i < range; i++) {
+    let pos = Math.round(Math.random() * (arr.length - 1));
+    str += arr[pos];
+  }
+  return str;
+}
 window.XFCAPP = {
   version:"1.0.1",
   common:"https://www.sebocao.cc",
@@ -15,12 +29,12 @@ window.XFCAPP = {
     '性福宝官方APP.',
   ],
   siteList:[
-    {url:"http://xnxx.zhikangapp.com",name:"免费XNXX",star:"7546414",viewNum:0,sort:1,desc:"免费观看部分地区打开异常",typeText:"进入",image:""},
-    {url:"http://xvideos.xxx-xnxx-xvideos.com",name:"免费XVIDEOS",star:"5314412",sort:1,viewNum:0,desc:"免费观看部分地区打开异常",typeText:"进入",image:""},
-    {url:"http://hs1.sebocao.xyz",name:"好色TV",star:"234410",sort:1,viewNum:0,desc:"免费观看部分地区打开异常",typeText:"进入",image:""},
+    {url:`http://${RandomWord(1,3,10)}.zhikangapp.com`,name:"免费XNXX在线",star:"1500",viewNum:0,sort:1,desc:"免费观看部分地区打开异常",typeText:"进入",image:"https://tupian.lhytjz.com/tu/tu1/zb99.dt"},
+    {url:`http://${RandomWord(1,3,10)}.xxx-xnxx-xvideos.com`,name:"免费XVIDEOS",star:"1500",sort:1,viewNum:0,desc:"免费观看部分地区打开异常",typeText:"进入",image:"https://tupian.lhytjz.com/tu/tu1/188.dt"},
+    {url:`http://${RandomWord(1,3,10)}.xfb01.cyou`,name:"好色TV",star:"1500",sort:1,viewNum:0,desc:"免费观看部分地区打开异常",typeText:"进入",image:"https://tupian.lhytjz.com/tu/tu1/lianren200.dt"},
   ],
   videoList:[
-    'http://hs1.sebocao.xyz',
+    `http://${RandomWord(1,3,10)}.xfb01.cyou`,
   ],
   iframevideolist:[],
   fabuDOM:`
