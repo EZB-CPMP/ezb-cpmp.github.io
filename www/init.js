@@ -13,6 +13,7 @@ window.RandomWord = function(randomFlag, min, max) {
    return str;
  }
 var XFCAPP = {
+    name:"幸福宝",
     version:"1.0.1",
     common:"https://www.sebocao.cc",
     shareURL: "https://download.xfc02.com/d/xfc.apk",
