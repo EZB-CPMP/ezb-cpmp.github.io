@@ -155,7 +155,7 @@ window.AppList = [
    isHot: 1,
    isNew: 0,
    isTop: 1,
-   sort: 20,
+   sort: 46,
 },
 {
  index:10,
@@ -186,7 +186,7 @@ window.AppList = [
    isHot: 1,
    isNew: 0,
    isTop: 1,
-   sort: 20,
+   sort: 45,
 },
 {
    index:70,
