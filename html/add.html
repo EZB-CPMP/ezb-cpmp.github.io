@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,
+      initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/pay/static/css/ele.css">
+    <link rel="stylesheet" rel="stylesheet" href="/pay/static/css/common.css?v=12234gdasdffg">
+
+    <style scoped lang="less">
+        ::v-deep .el-upload-dragger {
+            width: 100%;
+        }
+
+        .v-flex {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .v-flex-item {
+            flex: 1;
+        }
+
+        .v-row {
+            flex-direction: row;
+        }
+
+        .v-column {
+            flex-direction: column;
+        }
+
+        .v-link {
+            color: #576B95;
+            font-size: 26upx;
+        }
+
+        .v-items-center {
+            align-items: center;
+        }
+
+        .v-justify-center {
+            justify-content: center;
+        }
+
+        .v-justify-end {
+            justify-content: flex-end;
+        }
+
+        .v-justify-start {
+            justify-content: flex-start;
+        }
+
+        .v-justify-around {
+            justify-content: space-around;
+        }
+
+        .v-justify-between {
+            justify-content: space-between;
+        }
+
+        .v-center {
+            text-align: center;
+        }
+
+        .v-inline-item {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .v-column-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .v-items-start {
+            align-items: flex-start;
+        }
+
+        .v-flex-wrap {
+            flex-wrap: wrap;
+        }
+
+        ::v-deep .el-upload {
+            width: 100%;
+            display: block;
+        }
+
+        .TagEEmList .el-tag {
+            margin: 2px;
+        }
+
+        ::v-deep .el-checkbox-group {
+            margin: 0 !important;
+        }
+
+        .eml-checkbox {
+            margin-bottom: 5px;
+            margin-right: 5px;
+            width: 90px;
+            margin-left: 0px !important;
+        }
+
+        .el-checkbox-group {
+            margin: 10px 0;
+        }
+
+        .item-set-box {
+            padding-bottom: 25px;
+        }
+
+        .set-title {
+            margin: 10px 0;
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .desc-box .desc-box-item {
+            margin-bottom: 5px;
+        }
+
+        .item-set-box .label {
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        ::v-deep .el-color-picker__trigger {
+            height: 30px;
+            width: 30px;
+        }
+
+        ::v-deep .desc-input .el-radio {
+            margin: 3px !important;
+        }
+
+        .theme-color .el-form-item__content {
+            display: flex;
+            align-items: center;
+        }
+
+        .item-selece-box {
+            margin-top: 5px;
+        }
+
+        .item-selece-box span.label {
+            width: 80px;
+            display: inline-block;
+            text-align: right;
+        }
+
+        .item-selece-box span.label.red {
+            color: red;
+        }
+
+        .desc-input {
+            font-size: 14px;
+            margin-top: 5px;
+
+            .label {
+                width: 100px;
+            }
+        }
+
+        ::v-deep .table-cate-tag span {
+            margin-right: 2px;
+        }
+
+        .desc-box-item .el-input {
+            width: 300px;
+        }
+
+        .description-text {
+            padding: 0 5px;
+            width: calc(60% - 475px);
+        }
+
+        .TagEEmList {
+            width: 475px;
+        }
+
+        .desc-box {
+            width: 37%;
+        }
+
+        @media screen and (max-width: 768px) {
+            .description-text {
+                padding: 0 5px;
+                width: 100%;
+            }
+
+            .TagEEmList {
+                width: 100%;
+            }
+
+            .desc-box {
+                width: 100%;
+            }
+
+            .desc-box-item .el-input {
+                width: 200px;
+            }
+
+            .item-set-box button {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="app" class="page-content">
+        <header>
+            <div class="h-left">
+                <a href="/">首页</a>
+                <a href="/html/check.html">查询</a>
+                <a href="/html/update.html">批量修改</a>
+                <a href="/html/delete.html">删除</a>
+            </div>
+            <div class="h-right">
+                <span></span>
+            </div>
+        </header>
+        <div id="search-box">
+            <el-form :inline="true" :model="fromData" class="demo-form-inline">
+                <el-form-item label="跳转">
+                    <el-select clearable v-model="fromData.isJumpALL" placeholder="跳转选择">
+                        <el-option label="未开启" :value="0"></el-option>
+                        <el-option label="首页跳转" :value="1"></el-option>
+                        <el-option label="内页跳转" :value="2"></el-option>
+                        <el-option label="全跳转" :value="3"></el-option>
+                    </el-select>
+                </el-form-item>
+            </el-form>
+        </div>
+        <div class="section-item">
+            <div class="set-title">
+                2、设置描述<span>搜索引擎设置更容易收录的描述</span>
+            </div>
+
+            <div class="item-set-box">
+                <div class="Descprition v-flex v-flex-wrap">
+                    <div class="description-text">
+                        <el-input type="textarea" :placeholder="
+                      isOpenAutoDes
+                        ? '当前使用描述库，无需添加！'
+                        : '描述随机句子一行一个'
+                    " rows="12" :disabled="isOpenAutoDes" v-model="discAllList" style="width: 100%"></el-input>
+
+
+                    </div>
+                    <div class="TagEEmList">
+                        <el-checkbox-group v-model="emList">
+                            <el-checkbox class="eml-checkbox" border :label="item"
+                                v-for="(item, index) in allEmListList" :key="index">{{ item }}</el-checkbox>
+                        </el-checkbox-group>
+                        <div style="height: 30px" class="v-flex v-items-center">
+                            <el-checkbox :indeterminate="isIndeterminate" v-model="checkEmListAll"
+                                @change="handleCheckEmListAllChange">全选</el-checkbox>
+                            <el-button @click="emptyEmList(0)" v-if="emList.length > 0" type="primary"
+                                style="margin: 0 10px" size="mini">清空</el-button>
+                        </div>
+                    </div>
+                    <div class="desc-box">
+                        <div>
+                            <div class="desc-box-item" v-for="(item, index) in descListAll" :key="index">
+                                <el-input v-model="item.val" placeholder="描述自定义插入例如🔥【baidu.com】🔥"></el-input>
+
+                                <el-button type="danger" style="margin-left: 5px" @click="deleteDescListAll(index)"
+                                    :disabled="descListAll.length == 1">删除</el-button>
+                                <el-button type="primary" @click="addDescListAll()"
+                                    v-if="index == descListAll.length - 1">新增</el-button>
+                            </div>
+                            <div>
+                                <el-alert close-text title="如果里面填写  域名  二字就是动态域名格式  如 【域名】 生成的为 【baidu.com】 "
+                                    type="success">
+                                </el-alert>
+                                <div class="v-flex v-flex-wrap" style="overflow: scroll">
+                                    🔥🌻☀️🌼🌟✨💃👩🌙💦🍌🍆🌹🍓🍑🍊✅⚽🏀🧧🏆💰👑💎💹⭐✔️💖💯❤️💝🌈🚩🍑👉👇🥳🤞🏝️⭕✅☑️✔️❌❎➰➿〽️✳️✴️❇️#️⃣*️⃣0️⃣1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣🔟🔠🔡🔢🔣🔤🅰️🆎🅱️🆑🆒🆓ℹ️🆔Ⓜ️🆕🆖🅾️🆗🅿️🆘🆙🆚🈁🈂️🈷️🈶🈯🉐🈹🈚🈲🉑🈸🈴🈳㊗️㊙️🈺🈵🔴🟠🟡🟢🔵🟣🟤⚫⚪🟥🟧🟨🟩🟦🟪🟫⬛⬜😀😃😄😁😆😅🤣😂🙂🙃😉😊😇🥰😍🤩😘😗😚😙🐻🐻‍❄️🐨🐼🦥🦦🦨🦘🦡🐾🦃🐔🐓🐣🐤🐥🐦🐧🕊️🦅🦆🦢🦉🦩🦚🦜🐸🐊🐢🦎🐍🐲🐉🦕🦖🐳🐋🐬🐟🐠🐡🦈🐙🐚🐌🦋🐛🐜🐝🐞🦗🕷️🕸️🦂🦟🦠💐🌸💮🏵️🌹🥀🌺🌻🌼🌷🌱🌲🌳🌴🌵🌾🌿☘️🍀🍁🍂🍃🍄🍇🍈🍉🍊🍋🍌🍍🥭🍎🍏🍐🍑🍒🍓🥝🍅🥥🥑🍆🥔🥕🌽🌶️🥒🥬🥦🧄🧅😀😁😂😃😄😅😆😉😊😋😎😍😘😗😙😚😇😐😑😶😏😣😥😮😯😪😫😴😌😛😜😝😒😓😔😕😲😷😖😞😟😤😢😭😦😧😨😬😰😱😳😵😡😠😈👿
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="desc-input v-flex v-items-center">
+                        <span class="label">描述字长度: </span>
+                        <el-input type="number" style="width: 150px" v-model="descLength"></el-input>
+                    </div>
+                    <div class="desc-input v-flex v-items-center">
+                        <span class="label">描述结尾文字: </span>
+                        <el-input type="text" style="width: 150px" placeholder="如：，点击进入吧！"
+                            v-model="desEndWords"></el-input>
+                    </div>
+                    <div class="desc-input v-flex v-items-center">
+                        <span class="label">描述开头文字: </span>
+                        <el-input type="text" style="width: 150px" placeholder="如：，点击进入吧！"
+                            v-model="desStartWords"></el-input>
+                    </div>
+                    <div class="desc-input v-flex v-items-center">
+                        <span class="label">描述不用标题: </span>
+                        <el-switch style="display: block" v-model="noDisTitle"></el-switch>
+                    </div>
+                    <div style="margin: 10px 0" class="desc-input v-flex v-items-center">
+                        <span class="label">使用描述库: </span>
+                        <el-switch style="display: block" v-model="isOpenAutoDes">
+                        </el-switch>
+                    </div>
+
+                    <div style="margin: 10px 0" class="desc-input v-flex v-items-center">
+                        <span class="label">标题符号分割第一个(针对百度): </span>
+                        <el-switch style="display: block" v-model="isOneTitleDes">
+                        </el-switch>
+                    </div>
+
+                    <div class="desc-input v-flex v-items-center">
+                        <span class="label">描述类型： </span>
+                        <el-radio-group @change="disTypeSChange" v-model="disTypeS" size="small">
+                            <el-radio :label="1" border>色词</el-radio>
+                            <el-radio :label="2" border>BC词</el-radio>
+                            <el-radio :label="3" border>正规词</el-radio>
+                            <el-radio :label="4" border>百度色词</el-radio>
+                            <el-radio :label="5" border>搜狗色词</el-radio>
+                        </el-radio-group>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-item">
+            <div class="set-title">3、域名添加</div>
+            <div class="item-set-box">
+                <div style="margin: 20px 0">
+                    <el-radio v-model="addType" label="1">快速添加</el-radio>
+                    <el-radio v-model="addType" label="2">文件添加</el-radio>
+                </div>
+                <div v-show="addType == 1" style="margin: 10px 0">
+                    <div class="v-flex v-justify-between">
+                        <div style="width: 49.8%">
+                            <el-input v-model="firstDomainListValue" placeholder="baidu.com" type="textarea"
+                                :rows="3"></el-input>
+                            <div class="el-upload__tip" slot="tip">
+                                域名一行一个对应
+                                <b v-if="firstDomainListValue">{{
+                                    firstDomainListValue
+                                    .split("\n")
+                                    .filter((it) => it.length > 0)["length"]
+                                    }}
+                                    个</b>
+                            </div>
+                        </div>
+                        <div style="width: 49.8%">
+                            <el-input v-model="firstTitleListValue" placeholder="ror体育,ror体育官网,ror体育app下载"
+                                type="textarea" :rows="3"></el-input>
+                            <div class="el-upload__tip" slot="tip">
+                                标题一行一个对应如果标题少于域名将循环标题
+                                <b v-if="firstTitleListValue">{{
+                                    firstTitleListValue
+                                    .split("\n")
+                                    .filter((it) => it.length > 0)["length"]
+                                    }}
+                                    个</b>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin: 20px 0 0 0" class="v-flex v-justify-center">
+                        <el-button type="danger" plain size="large" style="width: 200px; height: 60px" @click="
+                      firstDomainListValue = '';
+                      firstTitleListValue = '';
+                    ">清空域名内容</el-button>
+                        <el-button style="width: 200px; height: 60px"
+                            :disabled="!firstDomainListValue || !firstTitleListValue" size="large" type="primary"
+                            @click="firstAddDomain">添加并且下一步</el-button>
+                    </div>
+                </div>
+                <div v-show="addType == 2">
+                    <el-upload class="upload-demo" drag action :auto-upload="false" accept=".csv,.xslx,.xsl,.xlsx,.xls"
+                        :on-change="uploadFileChange" :file-list="fileList" :on-remove="handleRemoveFileList">
+                        <i class="el-icon-upload"></i>
+                        <div class="el-upload__text">
+                            将Excel文件拖到此处，或<em>点击上传Excel</em>
+                        </div>
+                        <div class="el-upload__tip" slot="tip">
+                            只能上传 .xsl .xlsx .csv 格式文件 注意文件不能加密加锁
+                        </div>
+                    </el-upload>
+                </div>
+            </div>
+        </div>
+        <div class="section-item v-flex v-justify-center">
+            <el-button v-if="postUploadDomainList.length > 0" @click="clearPostUploadDomainList()" plain type="warning"
+                size="large" style="width: 200px; height: 60px">清空列表</el-button>
+            <el-button v-if="postUploadDomainList.length > 0" type="primary" size="large"
+                style="width: 200px; height: 60px" @click="filePostUploadSubmit()">确认提交建站<i
+                    class="el-icon-upload el-icon--right"></i></el-button>
+        </div>
+        <div class="section-item" style="padding-bottom: 40px">
+            <div class="set-title">4、添加一览&随机设置</div>
+            <div class="item-set-box">
+                <el-button size="mini" type="danger" @click="randomKeyDescCreate()">随机描述生成</el-button>
+                <el-button size="mini" type="success" @click="randomKeyWordsCreate()">随机关键词生成</el-button>
+                <el-button size="mini" type="primary" @click="randomBeiAn()">随机备案号</el-button>
+                <el-button size="mini" type="primary" @click="randomKeyArticle()">随机站点文章</el-button>
+                <el-button size="mini" type="primary" @click="randomKeyTemplate()">随机模板</el-button>
+            </div>
+            <el-table :data="postUploadDomainList" border style="width: 100%">
+                <el-table-column prop="link" label="域名" width="180">
+                </el-table-column>
+                <el-table-column prop="title" show-overflow-tooltip label="标题" width="160">
+                </el-table-column>
+                <el-table-column prop="keyWords" show-overflow-tooltip label="关键词" width="160">
+                </el-table-column>
+                <el-table-column prop="description" width="180" label="描述" show-overflow-tooltip>
+                </el-table-column>
+                <el-table-column show-overflow-tooltip prop="beiAnNumber" width="100" label="备案号">
+                </el-table-column>
+                <el-table-column show-overflow-tooltip prop="isFan" width="100" label="泛">
+                    <template slot-scope="scope">
+                        <span v-if="scope.row.isFan==1">全开启</span>
+                        <span v-else-if="scope.row.isFan==2">半开启</span>
+                        <span v-else>未开启</span>
+                    </template>
+                </el-table-column>
+                <el-table-column show-overflow-tooltip prop="isMuLu" width="100" label="目录">
+                    <template slot-scope="scope">
+                        <span v-if="scope.row.isMuLu">是</span>
+                        <span v-else>否</span>
+                    </template>
+                </el-table-column>
+                <el-table-column show-overflow-tooltip prop="isWordRandom" width="100" label="随机词">
+                    <template slot-scope="scope">
+                        <span v-if="scope.row.isWordRandom">是</span>
+                        <span v-else>否</span>
+                    </template>
+                </el-table-column>
+                <!-- <el-table-column
+                  prop="cids"
+                  align="center"
+                  label="分类目录"
+                  width="200"
+                >
+                  <template slot-scope="scope">
+                    <div  style="width:100%;overflow:auto;">
+                      <span v-for="(item, index) in scope.row.cids" :key="index">
+                        {{ cidsGetName(item) }}
+                      </span>
+                    </div>
+                  </template>
+                </el-table-column> -->
+                <!-- <el-table-column prop="sid" v-if="siteTypeALL == 4" align="center" label="站点文章" width="100">
+                    <template slot-scope="scope">
+                        <div>
+                            <span>{{ articleListFilter(scope.row.sid)
+                                }}</span>
+                        </div>
+                    </template>
+                </el-table-column> -->
+
+                <el-table-column prop="isFan" align="center" width="60" label="泛">
+                    <template slot-scope="scope">
+                        <span v-if="scope.row.isFan == 1">全开启</span>
+                        <span v-else-if="scope.row.isFan == 2">半开启</span>
+                        <span v-else>未开启</span>
+                    </template>
+                </el-table-column>
+
+
+
+
+                <el-table-column prop="isOpenUrl" width="110" align="center" label="跳转开启">
+                    <template slot-scope="scope">
+                        <div>
+                            <span v-if="scope.row.isOpenUrl == 0">不开启</span>
+                            <span v-if="scope.row.isOpenUrl == 1">首页跳转</span>
+                            <span v-if="scope.row.isOpenUrl == 2">内页跳转</span>
+                            <span v-if="scope.row.isOpenUrl == 3">全跳转</span>
+                        </div>
+                    </template>
+                </el-table-column>
+
+                <el-table-column prop="openUrlPage" width="110" align="center" label="跳转页面">
+                    <template slot-scope="scope">
+                        <div>
+                            <span>{{
+                                scope.row.openUrlPage == 1 ? "代理线" : "落地页"
+                                }}</span>
+                        </div>
+                    </template>
+                </el-table-column>
+
+                <el-table-column prop="isOpenModal" width="110" align="center" label="弹窗开启">
+                    <template slot-scope="scope">
+                        <div>
+                            <span>{{ scope.row.isOpenModal == 1 ? "开启" :
+                                "关闭" }}</span>
+                        </div>
+                    </template>
+                </el-table-column>
+               
+            </el-table>
+        </div>
+        <div v-show="passwordtc"
+            style="background: #fff;overflow:hidden;position: fixed;display:flex; z-index: 100;width: 100%;height: 100%;top:0;left: 0;justify-content: center;align-items: center;">
+            <el-input @change="yanchengpassword()" style="width: 200px;" v-model="password" placeholder=""></el-input>
+        </div>
+        <el-dialog :title="
+        '添加完成 成功：' +
+        deleteResult.success.length +
+        '  失败：' +
+        deleteResult.filed.length
+      " :visible.sync="allUrlCreateShow" width="50%">
+            <div v-if="deleteResult.filed.length > 0">
+                <el-alert title="提示 ：1、域名已经建站 2、域名格式不对 都是导致建站失败的原因!" type="error" style="margin-bottom: 10px"
+                    :closable="false">
+                </el-alert>
+                <div class="resault-dialog">
+                    <el-table :data="deleteResult.filed" border style="width: 100%">
+                        <el-table-column prop="link" width="180">
+                            <template slot="header">
+                                失败域名 （{{ deleteResult.filed.length }}）
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="title" label="标题"> </el-table-column>
+                        <el-table-column prop="message" label="失败原因"> </el-table-column>
+                    </el-table>
+                </div>
+            </div>
+            <div style="margin-top: 10px" v-if="deleteResult.success.length > 0">
+                <div class="resault-dialog">
+                    <el-table :data="deleteResult.success" border style="width: 100%">
+                        <el-table-column prop="link" width="180">
+                            <template slot="header">
+                                成功域名 （{{ deleteResult.success.length }}）
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="title" label="标题"> </el-table-column>
+                        <el-table-column label="状态">
+                            <template>
+                                <el-tag type="success">成功</el-tag>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                </div>
+            </div>
+
+            <span slot="footer" class="dialog-footer">
+
+                <el-button type="primary" @click="allUrlCreateShow = false">关闭</el-button>
+            </span>
+        </el-dialog>
+    </div>
+
+    <script src="/pay/static/js/axios.min.js"></script>
+    <script src="/pay/static/js/request.js"></script>
+    <script src="/pay/static/js/vue.js"></script>
+    <script src="/pay/static/js/ele.js"></script>
+    <script src="/pay/static/js/moment.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+
+    <script>
+        const keycode = "jiamibijibenkey-123";
+
+        new Vue({
+            el: '#app',
+            data: {
+                password: '',
+                passwordtc: true,
+                fromData: {
+                    isJumpALL: 0, // this.fromData.isJumpALL
+                },
+                categoryData: {
+                    navcategories: [],
+                    count: 0,
+                    limit: 10,
+                    page: 1,
+                },
+                cidsALL: [],
+                isOpenAutoDes: false,
+                addType: "1",
+                firstDomainListValue: "",
+                firstDomainList: "",
+                firstTitleList: "",
+                firstTitleListValue: "",
+                allUrlChangeShow: false,
+                allUrlCreateShow: false,
+                isOneTitleDes: false,
+                deleteResult: {
+                    success: [],
+                    filed: [],
+                },
+
+                cikulist: [],
+                // openUrlPcALL: "",
+                // openUrlH5ALL: "",
+                // openUrlAPPALL: "",
+                browserTypeALL: "",
+                descLength: 200,
+                noDisTitle: false,
+                disTypeS: 1,
+                desEndWords: "", // 描述结尾文字
+                desStartWords: "",
+                openUrlPageALL: 1, // 1跳转代理线 2落地页
+                typeListALL: "",
+                isOpenUrlALL: 0, //跳转 0 不跳转
+                isOpenModalALL: 0, // 弹窗
+                tdkEncodeALL: false,
+                isOpenIsPcPagelALL: false,
+                isOutFriendLinkALL: false,
+                imgTypeNameALL: "bdmn-151",
+                siteTypeALL: 4,
+                agentidALL: "",
+                isAllMuLu: false,
+                isAllWordRandom: false,
+                isAllFanSite: 0,
+                fixedSid: [26],
+                descListAll: [{ val: "" }], // 描述里面的 代理域名
+                AllTemplate: [
+
+                ],
+                dataForm: {
+                    link: "",
+                    status: true,
+                    // sid: null,
+                    cids: [],
+                    isOpenUrl: 0,
+                    openUrlPc: "",
+                    openUrlH5: "",
+                    openUrlAPP: "",
+                    isFan: 0,
+                    siteType: 4,
+                    agentid: "",
+                    isOpenModal: 0,
+                    openUrlPage: 1,
+                    isWordRandom: false,
+                    typeList: [],
+                },
+                domainListText: "",
+                domainList: [],
+                rules: {
+                    link: [{ required: true, message: "请输入域名", trigger: "blur" }],
+                    sid: [{ required: true, message: "请输入站点！", trigger: "blur" }],
+                    status: [{ required: true, message: "", trigger: "change" }],
+                },
+                fileList: [],
+                fileDomainList: [],
+                postUploadDomainList: [],
+
+                emList: [],
+                isIndeterminate: true,
+                checkEmListAll: false,
+                allEmListList: [
+                    "🔥🔥",
+                    "💃💃",
+                    "👩‍⚕️👩‍⚕️",
+                    "👩‍🎤👩‍🎤",
+                    "💦💦",
+                    "🌹🌹",
+                    "✅✅",
+                    "⚽⚽",
+                    "🏀🏀",
+                    "㊗️㊗️",
+                    "🧧🧧",
+                    "🏆🏆",
+                    "💰💰",
+                    "👑👑",
+                    "💎💎",
+                    "💹💹",
+                    "⭐⭐",
+                    "✔️✔️",
+                    "💖💖",
+                    "💯💯",
+                    "❤️❤️",
+                    "💝💝",
+                    "🌈🌈",
+                    "🚩🚩",
+                    "🍑🍑",
+                    "👉👉",
+                    "👇👇",
+                    "🥳🥳",
+                    "🤞🤞",
+                    "🏝️🏝️",
+                ],
+                discAllList: "",
+                fanCategoryId: "",
+                muluCategoryId: "",
+                beiAnCityList: [
+                    "京",
+                    "津",
+                    "冀",
+                    "江",
+                    "浙",
+                    "沪",
+                    "新",
+                    "藏",
+                    "粤",
+                    "桂",
+                    "闽",
+                    "云",
+                    "贵",
+                    "川",
+                    "陕",
+                    "甘",
+                    "宁",
+                    "蒙",
+                    "青",
+                    "渝",
+                    "琼",
+                    "湘",
+                    "赣",
+                    "鄂",
+                    "皖",
+                    "晋",
+                    "豫",
+                    "鲁",
+                ],
+
+            },
+            computed:{
+                wordList() {
+                let resArr = [];
+                let str = this.discAllList.trim();
+                if (str) {
+                    let arr = str.split("\n");
+                    if (arr.length > 0) {
+                    arr = Array.from(new Set(arr));
+                    arr.forEach((item) => {
+                        if (item && item.length) {
+                        let filterItem = item.replace(/\s/g, "");
+                        resArr.push(filterItem);
+                        }
+                    });
+                    }
+                }
+                return resArr;
+                }
+            },
+            mounted() {
+                let passwordc = localStorage.getItem("PASSWORD")
+                if (passwordc && passwordc.indexOf('8') == 0) {
+                    this.password = passwordc;
+                    this.passwordtc = false
+                }
+                // request({
+                //     url: '/api/pay/payTypeList'
+                // }).then(res => {
+                //     this.typeSelectTableData = res
+                // })
+            },
+            methods: {
+                yanchengpassword() {
+                    if (this.password.length == 3 && this.password > 500 && this.password < 5000) {
+                        this.passwordtc = false;
+                        localStorage.setItem("PASSWORD", this.password)
+                    }
+                },
+                jiamiFn(datac) {
+                    let casd = datac
+                    if (typeof casd !== 'string') {
+                        casd = JSON.stringify(casd)
+                    }
+                    let content = CryptoJS.AES.encrypt(
+                        casd,
+                        keycode
+                    ).toString();
+                    return content;
+                },
+                jiemiFn(datac) {
+                    let casd = datac
+                    let isString = 1
+                    if (typeof datac !== 'string') {
+                        casd = JSON.stringify(casd)
+                        isString = 0
+                    }
+                    let bytes = CryptoJS.AES.decrypt(casd, keycode);
+                    let originalText = bytes.toString(CryptoJS.enc.Utf8);
+                    if (isString == 1) {
+                        originalText = JSON.parse(originalText)
+                    }
+                    return originalText
+                },
+
+
+
+                disTypeSChange(val) {
+                    if (val == 1) {
+                        this.cikulist = cikulistse;
+                    } else if (val == 2) {
+                        this.cikulist = cikulistbc;
+                    } else if (val == 3) {
+                        this.cikulist = cikuzhenggui;
+                    } else if (val == 4) {
+                        this.cikulist = cikubaiduse;
+                    }
+                },
+                typeListChange(val) {
+                    if (val) {
+                        this.typeListALL = val.replace(/\，|\s/g, ",");
+                    }
+                },
+                cidsGetName(_id) {
+                    let item = this.categoryData.navcategories.find(
+                        (item) => item["_id"] == _id
+                    );
+                    if (item && item.name) return item.name;
+                    return "";
+                },
+                categoryChange(ids) {
+                    this.cidsALL = [];
+                    ids.forEach((item) => {
+                        if (item) {
+                            this.cidsALL.push(item);
+                        }
+                    });
+                },
+                async getCategory(type) {
+                    if (type == "next") {
+                    } else if (type == "prev") {
+                    } else {
+                        await articleCategoryList({
+                            siteType: this.siteTypeALL,
+                            status: 1,
+                            sids: this.fixedSid,
+                            limit: 300,
+                        }).then((res) => {
+                            this.$set(this.categoryData, "navcategories", res.data.data);
+                            this.cidsALL = res.data.data.map((item) => item._id);
+                        });
+                    }
+                },
+                templateFilters(val) {
+                    // let result = "";
+                    // if (val) {
+                    //     let items = this.$store.state.user.templateList.filter(
+                    //         (item) => item.value == val
+                    //     );
+                    //     if (items.length > 0) {
+                    //         result = items[0].label;
+                    //     }
+                    // }
+                    // return result;
+                },
+                deleteDescListAll(index) {
+                    this.descListAll.splice(index, 1);
+                    if (this.descListAll.length > 0 && this.descListAll[0]["val"]) {
+                        window.localStorage.setItem(
+                            "DESCLISTALL",
+                            JSON.stringify(this.descListAll)
+                        );
+                    }
+                },
+                addDescListAll() {
+                    this.descListAll.push({ val: "" });
+                },
+                siteTypeListFilter(val) {
+                    // let item = this.$store.state.user.siteTypeList.find(
+                    //     (item) => item.value == val
+                    // );
+                    // if (item) {
+                    //     return item["label"];
+                    // } else {
+                    //     return "错误";
+                    // }
+                },
+                isOpenUrlFilter(val) {
+                    // let item = this.$store.state.user.isOpenUrlList.find(
+                    //     (item) => item.value == val
+                    // );
+                    // if (item) {
+                    //     return item["label"];
+                    // } else {
+                    //     return "错误";
+                    // }
+                },
+                agentIdListFilter(val) {
+                    // let item = this.userAgentList.find((item) => item._id == val);
+                    // if (item) {
+                    //     let sl = item["name"];
+                    //     if (sl.length > 20) {
+                    //         sl = sl.slice(0, 20) + "...";
+                    //     }
+                    //     return sl;
+                    // } else {
+                    //     return "错误";
+                    // }
+                },
+                articleListFilter(val) {
+                    // let item = this.$store.state.user.articleList.find(
+                    //     (item) => item.value == val
+                    // );
+                    // if (item) {
+                    //     return item["label"];
+                    // } else {
+                    //     return "错误";
+                    // }
+                },
+                handleCheckEmListAllChange(val) {
+                    this.emList = val ? this.allEmListList : [];
+                    this.isIndeterminate = false;
+                },
+                commonSeleceChange(val, name) {
+                    this.postUploadDomainList.forEach((item, index) => {
+                        this.postUploadDomainList[index][name] = val;
+                        this.$set(
+                            this.postUploadDomainList,
+                            index,
+                            this.postUploadDomainList[index]
+                        );
+                    });
+                    if (name == "siteType") {
+                        this.AllTemplate = [];
+                    }
+                },
+                articleListChange(val) {
+                    this.getCategory();
+                    if (val == -1) {
+                        // 随机文章
+                        return this.randomKeyArticle();
+                    }
+                },
+                fixedKeyArticle() {
+                    // 固定文章
+                    if (!this.fixedSid) return this.$message.error("请填写文章ID！");
+                    this.commonSeleceChange(this.fixedSid, "sid");
+                },
+                emptyEmList(val) {
+                    if (val == 0) {
+                        this.emList = [];
+                    }
+                },
+                closeEmList(index) {
+                    this.emList.splice(index, 1);
+                },
+                randomBeiAn() {
+                    // 随机备案号
+                    this.postUploadDomainList.forEach((item, index) => {
+                        this.postUploadDomainList[index]["beiAnNumber"] =
+                            this.randomOneW(this.beiAnCityList) +
+                            "ICP备" +
+                            Math.random().toString().slice(-8) +
+                            "号-" +
+                            Math.random().toString().slice(-1);
+                        this.$set(
+                            this.postUploadDomainList,
+                            index,
+                            this.postUploadDomainList[index]
+                        );
+                    });
+                },
+                randomKeyArticle() {
+                    // 随机文章
+                    this.postUploadDomainList.forEach((item, index) => {
+                        const sid = this.randomOneW(this.fixedSid);
+                        this.postUploadDomainList[index]["cids"] =
+                            this.categoryData.navcategories
+                                .filter((item) => item.sid === sid)
+                                .map((itemc) => itemc._id);
+                        this.postUploadDomainList[index]["sid"] = sid;
+                        this.$set(
+                            this.postUploadDomainList,
+                            index,
+                            this.postUploadDomainList[index]
+                        );
+                    });
+                },
+                randomKeyTemplate() {
+                    //随机模板
+                    this.postUploadDomainList.forEach((item, index) => {
+                        this.postUploadDomainList[index]["tname"] = this.randomOneW(
+                            this.AllTemplate
+                        );
+                        this.$set(
+                            this.postUploadDomainList,
+                            index,
+                            this.postUploadDomainList[index]
+                        );
+                    });
+                },
+                randomOneW(arr) {
+                    if (!arr || arr.length == 0) return "";
+                    return arr[Math.round(Math.random() * (arr.length - 1)) + 0];
+                },
+                randomKeyWordsCreate() {
+                    this.postUploadDomainList.forEach((item, index) => {
+                        let arrList = [
+                            item.title + "app",
+                            item.title + "app下载",
+                            // item.title + "游戏下载",
+                            // item.title + "手机版",
+                            // item.title + "首页",
+                        ];
+                        arrList.sort(function () {
+                            return 0.5 - Math.random();
+                        });
+                        // this.postUploadDomainList[index]["keyWords"] =
+                        //   item.title.replace(/\-|\_|\-/g, ",") +','+
+                        //   arrList.join(",").replace(/\-|\_|\-/g, ",");
+                        let karray = item.title
+                            .replace(/\/|\。|\"|\'|\，|\–|\、|\||\-|\_/g, ",")
+                            .replace(/\n/g, "").split(',');
+                        this.postUploadDomainList[index]["keyWords"] = karray[0] || ''
+                        this.$set(
+                            this.postUploadDomainList,
+                            index,
+                            this.postUploadDomainList[index]
+                        );
+                    });
+                },
+                randomKeyDescCreate() {
+                    this.postUploadDomainList.forEach((item, index) => {
+                        let em = this.emList.length > 0 ? this.randomOneW(this.emList) : ""; //随机表情
+                        let agentDomain = this.randomOneW(this.descListAll);
+                        this.randomOneW(this.emList);
+                        console.log(this.wordList)
+                        let descListNow = this.wordList;
+                        if (this.isOpenAutoDes) {
+                            descListNow = this.cikulist;
+                        }
+                        let des = `${item.title}${em}${agentDomain["val"]}${this.randomOneW(
+                            descListNow
+                        )}${item.title}${this.randomOneW(descListNow)}${this.randomOneW(
+                            descListNow
+                        )}${this.randomOneW(descListNow)}`;
+                        let descone = item.title
+                        if (this.isOneTitleDes) {
+                            descone = descone.split(/,|_|-|，|\|/)[0]
+                        }
+                        if (this.noDisTitle) {
+                            descone = ''
+                        }
+                        if (!this.isOpenAutoDes) {
+                            des = `${descone}${agentDomain["val"]}${this.randomOneW(
+                                descListNow
+                            )}`;
+                        }
+                        this.postUploadDomainList[index]["description"] = this.desStartWords +
+                            des
+                                .slice(0, this.descLength)
+                                .replace(/\n/g, "")
+                                .replace(/\-|\_|\|/g, ",")
+                                .replace(/域名/g, item.link) + this.desEndWords;
+                                console.log(this.postUploadDomainList[index]["description"])
+                        this.$set(
+                            this.postUploadDomainList,
+                            index,
+                            this.postUploadDomainList[index]
+                        );
+                    });
+                },
+                clearPostUploadDomainList() {
+                    this.fileList = [];
+                    this.fileDomainList = [];
+                    this.postUploadDomainList = [];
+                },
+                filePostUploadSubmit() {
+                    const loading = this.$loading({
+                        lock: true,
+                        text: "请耐心等待10秒...",
+                        spinner: "el-icon-loading",
+                        background: "rgba(0, 0, 0, 0.7)",
+                    });
+                    let datajm = this.jiamiFn(this.postUploadDomainList)
+
+                    request({
+                        url: '/api/multipleDomainCreate',
+                        methods: "post",
+                        data: { password: this.jiamiFn(this.password), domainList: datajm }
+                    }).then(res => {
+                        this.deleteResult = this.jiemiFn(res);
+                        this.allUrlCreateShow = true;
+                        this.clearPostUploadDomainList();
+                    }).catch((res) => {
+                        loading.close();
+                    }).finally(() => {
+                        loading.close();
+                    });
+
+                    // multipleDomainCreate({ password:this.password,domainList: datajm })
+                    //     .then((res) => {
+                    //         this.deleteResult = this.$jiemiFn(res.data);
+                    //         this.allUrlCreateShow = true;
+                    //         this.clearPostUploadDomainList();
+                    //     })
+                    //     .finally(() => {
+                    //         loading.close();
+                    //     });
+
+                    if (this.emList.length > 0) {
+                        window.localStorage.setItem("EMLIST", this.emList);
+                    } else {
+                        window.localStorage.removeItem("EMLIST");
+                    }
+                    if (this.descListAll.length > 0 && this.descListAll[0]["val"]) {
+                        window.localStorage.setItem(
+                            "DESCLISTALL",
+                            JSON.stringify(this.descListAll)
+                        );
+                    } else {
+                        window.localStorage.removeItem("DESCLISTALL");
+                    }
+                },
+                handleRemoveFileList() {
+                    this.fileList = [];
+                    this.fileDomainList = [];
+                    this.postUploadDomainList = [];
+                },
+                firstAddDomain() {
+                    let domainList = this.firstDomainListValue
+                        .split("\n")
+                        .filter((item) => !!item);
+                    let keywordList = this.firstTitleListValue
+                        .split("\n")
+                        .filter((item) => !!item);
+                    let forTitle = false;
+                    if (domainList.length > keywordList.length) {
+                        forTitle = true;
+                    }
+                    domainList = Array.from(new Set(domainList));
+                    domainList.forEach((item, index) => {
+                        let isHave = false;
+                        this.postUploadDomainList.forEach((c) => {
+                            if (c.link == item) {
+                                isHave = true;
+                            }
+                        });
+                        if (
+                            item &&
+                            (item.indexOf(".") > 0 || item.indexOf(":") > 0) &&
+                            !isHave
+                        ) {
+                           
+                            //词数量不够就循环
+                            let infoIndex = index;
+                            if (forTitle) {
+                                infoIndex = index % keywordList.length;
+                            }
+                            let typeList = this.typeListALL.split(",").filter((item) => !!item);
+                            this.postUploadDomainList.push({
+                                link: item,
+                                title: keywordList[infoIndex],
+                                keyWords: "",
+                                description: "",
+                                beiAnNumber: "",
+                                isJump: this.fromData.isJumpALL,
+                                isFan: this.isAllFanSite,
+                                isMuLu: this.isAllMuLu,
+                                isWordRandom: this.isAllWordRandom,
+                                siteType: this.siteTypeALL,
+                                isOpenUrl: this.isOpenUrlALL,
+                                imgTypeName: this.imgTypeNameALL,
+                                browserType: this.browserTypeALL,
+                                agentid: this.agentidALL,
+                                ispcpage: this.isOpenIsPcPagelALL,
+                                isOpenModal: this.isOpenModalALL,
+                                openUrlPage: this.openUrlPageALL,
+                                tdkEncode: this.tdkEncodeALL,
+                                isOutFriendLink: this.isOutFriendLinkALL,
+                                fcid: this.fanCategoryId,
+                                mcid: this.muluCategoryId,
+                            });
+                        } else {
+                            this.$message("格式不正确,或者列表已存在!");
+                        }
+                    });
+                    this.randomKeyWordsCreate();
+                    this.randomKeyDescCreate();
+                    this.randomBeiAn();
+                    // if (this.postUploadDomainList.length == domainList.length) {
+                    //   this.firstDomainListValue = "";
+                    //   this.firstTitleListValue = "";
+                    // }
+                    // document.querySelector(".main-container").scrollTop = 1000;
+                    // this.firstDomainListValue = "";
+                    // this.firstTitleListValue = "";
+                },
+                uploadFileChange(file) {
+                    if (file) {
+                        var reader = new FileReader();
+                        //以二进制方式读取文件
+                        reader.readAsBinaryString(file.raw);
+                        reader.onload = (e) => {
+                            //获取文件数据
+                            const data = e.target.result; //e.target.value
+                            //XLSX读取文件
+                            const wb = XLSX.read(data, { type: "binary" });
+                            //获取第一张表
+                            const wsname = wb.SheetNames[0];
+                            const ws = wb.Sheets[wsname];
+                            this.fileDomainList = XLSX.utils.sheet_to_json(ws, { header: 1 });
+                            if (
+                                this.fileDomainList.length > 1 &&
+                                this.fileDomainList[0][0].indexOf(".") == -1
+                            ) {
+                                this.fileDomainList.shift();
+                            }
+                            let cids = [];
+                            let sid = this.randomOneW(this.fixedSid);
+                            if (this.siteTypeALL == 4) {
+                                // 文章站过滤分类
+                                cids = this.categoryData.navcategories
+                                    .filter((item) => item.sid == sid)
+                                    .map((item) => item._id);
+                            } else {
+                                cids = this.cidsALL;
+                            }
+
+                            let typeList = this.typeListALL.split(",").filter((item) => !!item);
+                            this.fileDomainList.forEach((item) => {
+                                if (item && item.length >= 2) {
+                                    this.postUploadDomainList.push({
+                                        link: item[0].toLocaleLowerCase(),
+                                        title: item[1],
+                                        keyWords: item[2],
+                                        description: item[3],
+                                        beiAnNumber: "",
+                                        typeList,
+                                        sid: this.randomOneW(this.fixedSid),
+                                        tname: this.randomOneW(this.AllTemplate),
+                                        isFan: this.isAllFanSite,
+                                        siteType: this.siteTypeALL,
+                                        browserType: this.browserTypeALL,
+                                        isOpenUrl: this.isOpenUrlALL,
+                                        agentid: this.agentidALL,
+                                        imgTypeName: this.imgTypeNameALL,
+                                        isOpenModal: this.isOpenModalALL,
+                                        isOutFriendLink: this.isOutFriendLinkALL,
+                                        openUrlPage: this.openUrlPageALL,
+                                        tdkEncode: this.tdkEncodeALL,
+                                        fcid: this.fanCategoryId,
+                                    });
+                                }
+                            });
+                        };
+                    }
+                },
+                domainListChange() {
+                    this.domainList = [];
+                    let str = this.domainListText.trim().toLowerCase();
+                    if (str) {
+                        let arr = str.split("\n");
+                        if (arr.length > 0) {
+                            arr = Array.from(new Set(arr));
+                            arr.forEach((item) => {
+                                if (item && item.length && item.indexOf(".") >= 0) {
+                                    this.domainList.push({
+                                        link: item,
+                                        isOpenUrl: 0,
+                                        openUrlPc: "",
+                                        openUrlH5: "",
+                                        openUrlAPP: "",
+                                        isFan: 0,
+                                        status: true,
+                                        sid: this.siteList["data"][0]["id"],
+                                    });
+                                }
+                            });
+                        }
+                    }
+                },
+                linkChange(val) {
+                    if (val && val.indexOf("www.") >= 0) {
+                        this.dataForm.link = val.replace("www.", "");
+                    }
+                },
+                siteListChange(data) {
+                    this.dataForm.sid = data;
+                },
+                sitePiLiangListChange(sid, item, index) {
+                    this.domainList[index]["sid"] = sid;
+                },
+                async piLiangCreatConfrim() {
+                    if (this.domainList.length > 0) {
+                        for (let item of this.domainList) {
+                            await setTimeout(() => { }, 100);
+                            this.createDomain(item);
+                        }
+                        this.$message({
+                            message: "批量创建成功！",
+                            type: "success",
+                        });
+                    }
+                },
+                submitForm(dataForm) {
+                    this.$refs[dataForm].validate((valid) => {
+                        if (valid) {
+                            this.createDomain(this.dataForm).then(() => {
+                                this.$message({
+                                    message: "创建成功！",
+                                    type: "success",
+                                });
+                            });
+                        } else {
+                            // console.log("error submit!!");
+                            this.$message({
+                                message: "请填写正确的信息！",
+                                type: "error",
+                            });
+                            return false;
+                        }
+                    });
+                },
+                resetForm(dataForm) {
+                    this.$refs[dataForm].resetFields();
+                },
+                cancelALLUrl() {
+                    this.allUrlChangeShow = false;
+                },
+                clearALLUrl() {
+                    // this.openUrlPcALL = "";
+                    // this.openUrlH5ALL = "";
+                    // this.openUrlAPPALL = "";
+                    // this.domainList.forEach((item) => {
+                    //   item.openUrlPc = this.openUrlPcALL;
+                    //   item.openUrlH5 = this.openUrlH5ALL;
+                    //   item.openUrlAPP = this.openUrlAPPALL;
+                    // });
+                },
+                saveALLUrl() {
+                    // this.domainList.forEach((item) => {
+                    //   item.openUrlPc = this.openUrlPcALL;
+                    //   item.openUrlH5 = this.openUrlH5ALL;
+                    //   item.openUrlAPP = this.openUrlAPPALL;
+                    // });
+                    this.allUrlChangeShow = false;
+                },
+                async createDomain(data) {
+                    await createDomain(data).then((res) => {
+                        // this.$refs["dataForm"].resetFields();
+                        this.dataForm.link = "";
+                        this.domainList = [];
+                    });
+                },
+
+            }
+        })
+
+    </script>
+</body>
+
+</html>
