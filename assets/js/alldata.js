@@ -31,10 +31,10 @@ window.XFCAPP = {
   siteList:[
     {url:`http://${RandomWord(1,3,10)}.zhikangapp.com`,name:"免费XNXX在线",star:"1195.83w",viewNum:0,sort:1,desc:"免费观看部分地区打开异常",typeText:"进入",image:"https://tupian.lhytjz.com/tu/tu1/zb99.dt"},
     {url:`http://${RandomWord(1,3,10)}.xxx-xnxx-xvideos.com`,name:"免费XVIDEOS",star:"875.31w",sort:1,viewNum:0,desc:"免费观看部分地区打开异常",typeText:"进入",image:"https://tupian.lhytjz.com/tu/tu1/188.dt"},
-    {url:`http://${RandomWord(1,3,10)}.xfb01.cyou`,name:"免费好色TV",star:"765.56w",sort:1,viewNum:0,desc:"免费观看部分地区打开异常",typeText:"进入",image:"https://tupian.lhytjz.com/tu/tu1/lianren200.dt"},
+    {url:`http://${RandomWord(1,3,10)}.xfb01.top`,name:"免费好色TV",star:"765.56w",sort:1,viewNum:0,desc:"免费观看部分地区打开异常",typeText:"进入",image:"https://tupian.lhytjz.com/tu/tu1/lianren200.dt"},
   ],
   videoList:[
-    `http://${RandomWord(1,3,10)}.xfb01.cyou`,
+    `http://${RandomWord(1,3,10)}.xfb01.top`,
   ],
   iframevideolist:[],
   fabuDOM:`
